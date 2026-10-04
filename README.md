@@ -75,7 +75,7 @@ Key concepts applied include:
 
 ### Prerequisites
 
-Ensure you have Node.js (v18+) installed, and the [IdeaDrop API](https://github.com/bradtraversy/idea-drop-api) running locally or accessible remotely.
+Ensure you have Node.js (v18+) installed, and the [IdeaDrop API](https://github.com/shadman2503/idea-drop-api) running locally or accessible remotely.
 
 ### Installation
 
