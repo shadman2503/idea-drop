@@ -1,193 +1,119 @@
-Welcome to your new TanStack Start app! 
+# IdeaDrop UI
 
-# Getting Started
+A modern, responsive full-stack web application for sharing and managing ideas, featuring seamless user authentication, type-safe routing, and efficient server-state caching.
 
-To run this application:
+🔗 **Live Demo:** https://idea-drop-mu.vercel.app/  
+🔗 **Backend API:** https://idea-drop-api-ryze.onrender.com  
+Original Project by **[Brad Traversy](https://github.com/bradtraversy)**: [bradtraversy/idea-drop-ui](https://github.com/bradtraversy/idea-drop-ui)
 
-```bash
-npm install
-npm run dev
-```
+---
 
-# Building For Production
+## Learning Objectives
 
-To build this application for production:
+This project was developed as a hands-on learning project by following the **"Modern React From the Beginning"** course by [Brad Traversy](https://github.com/bradtraversy).  
+The primary goal was to move from core React concepts to building a production-ready, full-stack client application with modern routing and data-fetching patterns.
 
-```bash
-npm run build
-```
+Key concepts applied include:
 
-## Testing
+* **Component-Based Architecture:** Structuring the UI into clean, reusable, and maintainable React components styled with Tailwind CSS.
+* **Type-Safe File-Based Routing:** Implementing TanStack Router for route tree generation, layout routes, nested routing, and protected routes.
+* **Server State Management:** Utilizing TanStack Query to manage query caching, background data refetching, mutations, and automatic cache invalidation.
+* **Authentication & Authorization:** Implementing JWT-based authentication, user registration, login, automatic token refresh, and route guards.
+* **Axios Interceptors:** Configuring request interceptors to automatically attach Bearer tokens and response interceptors to seamlessly handle 401 expiration and refresh token rotation.
+* **CRUD API Integration:** Performing full CRUD (Create, Read, Update, Delete) operations on ideas by integrating with a REST API using Axios.
+* **Context & Global State:** Managing authentication state across the application via React Context.
+* **Environment Configuration:** Using `.env` files for securely configuring local and production API endpoints.
+* **Modern Development Workflow:** Building with React 19, TypeScript, and Vite for optimal developer experience, fast build times, and deployment on Vercel.
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+---
 
-```bash
-npm run test
-```
+## Features
 
-## Styling
+- User registration and login
+- JWT-based authentication with automatic token refresh
+- Axios request & response interceptors for seamless Bearer token injection and 401 refresh handling
+- Protected routes for authenticated actions (creating, editing, and deleting ideas)
+- Complete CRUD operations for ideas
+- Type-safe file-based routing with TanStack Router
+- Efficient asynchronous state management with TanStack Query
+- Dynamic route-based pages
+- Clean, responsive UI built with Tailwind CSS v4 & Lucide React icons
+- Environment-based configuration with `.env`
+- Deployed-API friendly
+- Frontend: React 19 + TypeScript (via Vite)
+- Routing: TanStack Router
+- State Management: TanStack Query
+- Backend: IdeaDrop REST API (Node.js / Express / MongoDB)
+- Communication: Axios (REST API)
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+---
 
-### Removing Tailwind CSS
+## Application Routes
 
-If you prefer not to use Tailwind CSS:
+| Route | Page | Access | Description |
+| :--- | :--- | :--- | :--- |
+| `/` | Home | Public | Landing page featuring latest ideas and quick actions |
+| `/ideas` | Ideas Explorer | Public | Browse all shared community ideas |
+| `/ideas/$ideaId` | Idea Details | Public | View complete details, author info, and idea tags |
+| `/ideas/new` | Create Idea | Protected | Form to create and submit a new idea |
+| `/ideas/$ideaId/edit` | Edit Idea | Protected | Form to modify and update an existing idea |
+| `/login` | Login | Public | User authentication page |
+| `/register` | Register | Public | New account registration page |
 
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `npm install @tailwindcss/vite tailwindcss -D`
+---
 
+## Original Creator & Credits
 
+* **Original Creator:** [Brad Traversy](https://github.com/bradtraversy)
+* **Original Repository:** [bradtraversy/idea-drop-ui](https://github.com/bradtraversy/idea-drop-ui)
+* **API Repository:** [bradtraversy/idea-drop-api](https://github.com/bradtraversy/idea-drop-api)
+* **Course:** Modern React From the Beginning
 
-## Routing
+---
 
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
+## Getting Started
 
-### Adding A Route
+### Prerequisites
 
-To add a new route to your application just add a new file in the `./src/routes` directory.
+Ensure you have Node.js (v18+) installed, and the [IdeaDrop API](https://github.com/bradtraversy/idea-drop-api) running locally or accessible remotely.
 
-TanStack will automatically generate the content of the route file for you.
+### Installation
 
-Now that you have two routes you can use a `Link` component to navigate between them.
+1. Clone the repository and navigate to the UI directory:
+   ```bash
+   cd idea-drop-ui
+   ```
 
-### Adding Links
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
+3. Configure environment variables in `.env`:
+   ```env
+   VITE_API_URL="http://localhost:5000"
+   VITE_PRODUCTION_API_URL="https://idea-drop-api-ryze.onrender.com"
+   ```
 
-```tsx
-import { Link } from "@tanstack/react-router";
-```
+4. Available Scripts:
+   - **Start dev server:**
+     ```bash
+     npm run dev
+     ```
+   - **Build for production:**
+     ```bash
+     npm run build
+     ```
+   - **Preview production build:**
+     ```bash
+     npm run preview
+     ```
+   - **Run tests:**
+     ```bash
+     npm test
+     ```
+   - **Run local mock JSON server:**
+     ```bash
+     npm run json-server
+     ```
 
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
